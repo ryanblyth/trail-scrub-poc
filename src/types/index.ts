@@ -6,7 +6,7 @@ export interface TrailPoint {
     coordinates: [number, number]; // [longitude, latitude]
   };
   properties: {
-    km_from_start: number;
+    miles_from_start: number;
     [key: string]: any;
   };
 }

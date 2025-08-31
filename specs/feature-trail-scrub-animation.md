@@ -21,7 +21,7 @@ As a reader, I want to see the Highland Mary Trail “draw” itself as I scroll
 
 ## Data
 - Input: `FeatureCollection<LineString>` with ordered coordinates.
-- Optional POIs: `FeatureCollection<Point>` with `km_from_start`.
+- Optional POIs: `FeatureCollection<Point>` with `miles_from_start`.
 
 ## Non-Functional
 - Perf budget: +<60kb gzipped JS.

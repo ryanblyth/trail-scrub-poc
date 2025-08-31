@@ -29,7 +29,7 @@ export class MarkerAnimator {
     this.trailData = trailData;
     
     // Calculate trail length using Turf.js
-    this.trailLength = length(trailData, { units: 'meters' });
+    this.trailLength = length(trailData, { units: 'miles' });
 
     // Create marker element
     const markerElement = document.createElement('div');
@@ -82,8 +82,8 @@ export class MarkerAnimator {
       }
       
       // Use Turf.js along() to get precise position
-      // Per AC3: ±5m accuracy requirement
-      const point = along(lineStringFeature, distance, { units: 'meters' });
+      // Per AC3: ±5m accuracy requirement (converted to feet for imperial units)
+      const point = along(lineStringFeature, distance, { units: 'miles' });
       
       if (point && point.geometry && point.geometry.coordinates && point.geometry.coordinates.length >= 2) {
         const [lng, lat] = point.geometry.coordinates;

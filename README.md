@@ -108,7 +108,7 @@ interface TrailLine {
     properties: {
         name?: string;
         difficulty?: string;
-        length_km?: number;
+        length_miles?: number;
         [key: string]: any;
     };
 }
@@ -124,7 +124,7 @@ interface TrailPoint {
         coordinates: [number, number]; // [longitude, latitude]
     };
     properties: {
-        km_from_start: number;
+        miles_from_start: number;
         name: string;
         type: string;
         [key: string]: any;

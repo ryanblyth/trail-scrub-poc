@@ -182,8 +182,8 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
       properties: {
         name: 'Highland Mary Trail',
         difficulty: 'moderate',
-        length_km: 8.5,
-        elevation_gain_m: 450
+        length_miles: 5.3,
+        elevation_gain_ft: 1476
       }
     }]
   };
@@ -197,7 +197,7 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
         coordinates: [-106.4567, 37.8234]
       },
       properties: {
-        km_from_start: 0,
+        miles_from_start: 0,
         name: 'Trailhead',
         type: 'start'
       }
@@ -209,7 +209,7 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
         coordinates: [-106.4856, 37.8413]
       },
       properties: {
-        km_from_start: 2.1,
+        miles_from_start: 1.3,
         name: 'Meadow Viewpoint',
         type: 'viewpoint'
       }
@@ -221,7 +221,7 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
         coordinates: [-106.5301, 37.8657]
       },
       properties: {
-        km_from_start: 4.3,
+        miles_from_start: 2.7,
         name: 'Alpine Lake',
         type: 'landmark'
       }
@@ -233,7 +233,7 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
         coordinates: [-106.5901, 37.8999]
       },
       properties: {
-        km_from_start: 6.2,
+        miles_from_start: 3.9,
         name: 'Summit Ridge',
         type: 'viewpoint'
       }
@@ -245,7 +245,7 @@ export function loadSampleTrailData(): { trailData: TrailData; poiData: TrailPoi
         coordinates: [-106.8167, 38.0234]
       },
       properties: {
-        km_from_start: 8.5,
+        miles_from_start: 5.3,
         name: 'Trail End',
         type: 'end'
       }

@@ -1,0 +1,36 @@
+{
+  "name": "trail-scrub-poc",
+  "version": "1.0.0",
+  "description": "Trail scrub animation proof of concept using Mapbox GL JS, GSAP ScrollTrigger, and Lenis",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:lib": "tsc",
+    "build:demo": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@turf/along": "^6.5.0",
+    "@turf/length": "^6.5.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.0.35",
+    "mapbox-gl": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/mapbox-gl": "^2.7.21",
+    "terser": "^5.43.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "keywords": [
+    "mapbox",
+    "gsap",
+    "scrolltrigger",
+    "trail",
+    "animation"
+  ],
+  "author": "Trail Scrub Team",
+  "license": "MIT"
+}

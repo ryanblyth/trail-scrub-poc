@@ -63,17 +63,13 @@ export class PerformanceMonitor {
    * Per AC4: Throttle updates to maintain target FPS
    */
   shouldUpdate(): boolean {
-    // Temporarily disable throttling for progress bar debugging
-    return true;
+    const currentTime = performance.now();
+    const timeSinceLastUpdate = currentTime - this.lastUpdate;
     
-    // Original throttling logic:
-    // const currentTime = performance.now();
-    // const timeSinceLastUpdate = currentTime - this.lastUpdate;
-    // 
-    // // Use different thresholds for mobile vs desktop
-    // const targetInterval = this.isMobile ? 33 : 16; // 30fps mobile, 60fps desktop
-    // 
-    // return timeSinceLastUpdate >= targetInterval;
+    // Use different thresholds for mobile vs desktop
+    const targetInterval = this.isMobile ? 33 : 16; // 30fps mobile, 60fps desktop
+    
+    return timeSinceLastUpdate >= targetInterval;
   }
 
   /**

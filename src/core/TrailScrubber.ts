@@ -79,16 +79,12 @@ export class TrailScrubber {
    * Called by ScrollTrigger onUpdate - throttled for performance per AC4
    */
   updateProgress(progress: number): void {
-    console.log('TrailScrubber.updateProgress called:', { progress, timestamp: Date.now() });
-    
     // Throttle updates to maintain 55+ fps per AC4
     if (!this.performanceMonitor.shouldUpdate()) {
-      console.log('Update throttled by performance monitor');
       return;
     }
 
     this.currentProgress = Math.max(0, Math.min(1, progress));
-    console.log('Current progress updated to:', this.currentProgress);
     
     // Update trail reveal
     this.renderer.updateTrailReveal(this.currentProgress);

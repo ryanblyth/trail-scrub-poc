@@ -71,7 +71,6 @@ export class ScrollController {
       onUpdate: (self) => {
         // Per spec: No heavy work inside ScrollTrigger onUpdate
         // Throttle map updates in TrailScrubber.updateProgress()
-        console.log('ScrollTrigger onUpdate called:', { progress: self.progress, timestamp: Date.now() });
         this.trailScrubber.updateProgress(self.progress);
       },
       onEnter: () => {

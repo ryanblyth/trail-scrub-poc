@@ -18,8 +18,6 @@ let isInitialized = false;
 // DOM elements
 let progressFill = null;
 let progressText = null;
-let fpsDisplay = null;
-let progressDisplay = null;
 let markerToggle = null;
 let reducedMotionToggle = null;
 let resetButton = null;
@@ -70,15 +68,15 @@ async function initDemo() {
         // Initialize scroll trigger
         scrollController.initializeScrollTrigger('#trail-animation');
         
-        // Setup UI updates
-        setupUIUpdates();
-        
         // Setup controls
         setupControls();
         
         isInitialized = true;
         
         console.log('Trail Scrub Animation Demo initialized successfully');
+        
+        // Setup UI updates AFTER initialization
+        setupUIUpdates();
         
     } catch (error) {
         console.error('Failed to initialize demo:', error);
@@ -88,39 +86,48 @@ async function initDemo() {
 
 /**
  * Setup UI updates for progress and performance metrics
+ * Per AC7: Visual progress indicator displays current scroll progress (0-100%)
  */
 function setupUIUpdates() {
-    // Get DOM elements
+    console.log('Setting up UI updates...');
+    
+    // Get DOM elements for progress bar
     progressFill = document.getElementById('progress-fill');
     progressText = document.getElementById('progress-text');
-    fpsDisplay = document.getElementById('fps-display');
-    progressDisplay = document.getElementById('progress-display');
+    
+    console.log('Progress elements found:', {
+        progressFill: !!progressFill,
+        progressText: !!progressText,
+        trailScrubber: !!trailScrubber,
+        isInitialized: isInitialized
+    });
     
     // Update UI every frame for smooth progress display
     function updateUI() {
-        if (!trailScrubber || !isInitialized) return;
+        if (!trailScrubber || !isInitialized) {
+            console.log('Skipping UI update:', { trailScrubber: !!trailScrubber, isInitialized });
+            requestAnimationFrame(updateUI);
+            return;
+        }
         
-        // Update progress indicators
+        // Update progress indicators per AC7
         const progress = trailScrubber.getCurrentProgress();
         const progressPercent = Math.round(progress * 100);
         
+        console.log('Progress update:', { progress, progressPercent, timestamp: Date.now() });
+        
         if (progressFill) {
             progressFill.style.width = `${progressPercent}%`;
+            console.log('Updated progress fill width to:', progressFill.style.width);
+        } else {
+            console.warn('Progress fill element not found');
         }
         
         if (progressText) {
             progressText.textContent = `${progressPercent}%`;
-        }
-        
-        if (progressDisplay) {
-            progressDisplay.textContent = `${progressPercent}%`;
-        }
-        
-        // Update performance metrics
-        const metrics = trailScrubber.getPerformanceMetrics();
-        if (fpsDisplay) {
-            fpsDisplay.textContent = metrics.fps.toString();
-            fpsDisplay.className = `metric-value ${metrics.fps >= 55 ? 'good' : 'warning'}`;
+            console.log('Updated progress text to:', progressText.textContent);
+        } else {
+            console.warn('Progress text element not found');
         }
         
         requestAnimationFrame(updateUI);

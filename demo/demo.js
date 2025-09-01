@@ -18,8 +18,6 @@ let isInitialized = false;
 // DOM elements
 let progressFill = null;
 let progressText = null;
-let fpsDisplay = null;
-let progressDisplay = null;
 let markerToggle = null;
 let reducedMotionToggle = null;
 let resetButton = null;
@@ -30,12 +28,6 @@ let jumpToEndButton = null;
  */
 async function initDemo() {
     try {
-        console.log('Starting demo initialization...');
-        console.log('Mapbox token:', DEMO_CONFIG.mapboxToken ? 'Present' : 'Missing');
-        console.log('DOM ready state:', document.readyState);
-        console.log('Trail map element exists:', !!document.getElementById('trail-map'));
-        console.log('Trail map element:', document.getElementById('trail-map'));
-        
         // Check for Mapbox token
         if (!DEMO_CONFIG.mapboxToken || DEMO_CONFIG.mapboxToken.includes('example')) {
             showError('Please provide a valid Mapbox access token in demo.js');
@@ -47,14 +39,6 @@ async function initDemo() {
         
         // Create trail scrubber instance
         const mapElement = document.getElementById('trail-map');
-        console.log('Map element for TrailScrubber:', mapElement);
-        console.log('Map element dimensions:', {
-            offsetWidth: mapElement.offsetWidth,
-            offsetHeight: mapElement.offsetHeight,
-            clientWidth: mapElement.clientWidth,
-            clientHeight: mapElement.clientHeight,
-            getBoundingClientRect: mapElement.getBoundingClientRect()
-        });
         
         const { trailScrubber: ts, scrollController: sc } = createTrailScrubberWithDefaults(
             mapElement,
@@ -70,15 +54,13 @@ async function initDemo() {
         // Initialize scroll trigger
         scrollController.initializeScrollTrigger('#trail-animation');
         
-        // Setup UI updates
-        setupUIUpdates();
-        
         // Setup controls
         setupControls();
         
         isInitialized = true;
         
-        console.log('Trail Scrub Animation Demo initialized successfully');
+        // Setup UI updates AFTER initialization
+        setupUIUpdates();
         
     } catch (error) {
         console.error('Failed to initialize demo:', error);
@@ -88,19 +70,21 @@ async function initDemo() {
 
 /**
  * Setup UI updates for progress and performance metrics
+ * Per AC7: Visual progress indicator displays current scroll progress (0-100%)
  */
 function setupUIUpdates() {
-    // Get DOM elements
+    // Get DOM elements for progress bar
     progressFill = document.getElementById('progress-fill');
     progressText = document.getElementById('progress-text');
-    fpsDisplay = document.getElementById('fps-display');
-    progressDisplay = document.getElementById('progress-display');
     
     // Update UI every frame for smooth progress display
     function updateUI() {
-        if (!trailScrubber || !isInitialized) return;
+        if (!trailScrubber || !isInitialized) {
+            requestAnimationFrame(updateUI);
+            return;
+        }
         
-        // Update progress indicators
+        // Update progress indicators per AC7
         const progress = trailScrubber.getCurrentProgress();
         const progressPercent = Math.round(progress * 100);
         
@@ -110,17 +94,6 @@ function setupUIUpdates() {
         
         if (progressText) {
             progressText.textContent = `${progressPercent}%`;
-        }
-        
-        if (progressDisplay) {
-            progressDisplay.textContent = `${progressPercent}%`;
-        }
-        
-        // Update performance metrics
-        const metrics = trailScrubber.getPerformanceMetrics();
-        if (fpsDisplay) {
-            fpsDisplay.textContent = metrics.fps.toString();
-            fpsDisplay.className = `metric-value ${metrics.fps >= 55 ? 'good' : 'warning'}`;
         }
         
         requestAnimationFrame(updateUI);
@@ -238,13 +211,8 @@ window.addEventListener('beforeunload', cleanup);
 
 // Initialize demo when DOM is ready
 function waitForDOM() {
-    console.log('DOM ready state:', document.readyState);
-    console.log('Trail map element exists:', !!document.getElementById('trail-map'));
-    
     // Always wait for window load to ensure everything is ready
     window.addEventListener('load', () => {
-        console.log('Window load fired');
-        console.log('Trail map element after load:', !!document.getElementById('trail-map'));
         initDemo();
     });
 }

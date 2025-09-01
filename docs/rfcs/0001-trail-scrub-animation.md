@@ -22,6 +22,7 @@ We want to visualize hiking trails in a scrollytelling flow where the trail path
 - Add two line layers: base (muted), reveal (scrubbed).
 - Use GSAP ScrollTrigger with Lenis scrollerProxy to tie animation to scroll.
 - Optionally animate a dot marker with Turf.js `along()`.
+- Display visual progress indicator below map showing scroll completion (0-100%).
 
 ## Risks & Mitigations
 - Jank with heavy trails → simplify GeoJSON, throttle updates.

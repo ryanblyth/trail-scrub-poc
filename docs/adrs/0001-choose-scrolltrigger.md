@@ -5,6 +5,7 @@
 - **Decision**: Use GSAP ScrollTrigger with Lenis integration.
 - **Consequences**:
   - + Stronger scrub & pin control.
-  - + Easy to sync with other animations (charts, text).
-  - - Developers need GSAP familiarity.
-  - - Consider license for commercial use.
+- + Easy to sync with other animations (charts, text).
+- + Built-in progress tracking for ScrollTrigger.
+- - Developers need GSAP familiarity.
+- - Consider license for commercial use.

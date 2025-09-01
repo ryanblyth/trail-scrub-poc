@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Scrub Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #map { width: 100%; height: 400px; border: 1px solid #ccc; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Trail Scrub Test</h1>
+    <div id="map"></div>
+    <div id="status"></div>
+    
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+    
+    <script type="module">
+        import { createTrailScrubberWithDefaults, loadSampleTrailData } from './src/index.ts';
+        
+        const status = document.getElementById('status');
+        
+        try {
+            status.innerHTML = '<p>Loading trail scrubber...</p>';
+            
+            // Test with a dummy token (this will fail but we can see if the import works)
+            const { trailScrubber, scrollController } = createTrailScrubberWithDefaults(
+                '#map',
+                'test-token'
+            );
+            
+            status.innerHTML = '<p class="success">Trail scrubber created successfully!</p>';
+            
+        } catch (error) {
+            status.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            console.error('Test error:', error);
+        }
+    </script>
+</body>
+</html>
